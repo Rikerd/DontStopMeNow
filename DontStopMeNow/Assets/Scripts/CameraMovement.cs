@@ -5,14 +5,16 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour {
     public float movementSpeed;
 
+    private PlayerController player;
+
 	// Use this for initialization
 	void Start () {
-
+        player = GetComponentInChildren<PlayerController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (transform.childCount != 0)
+        if (!player.isPlayerDead())
         {
             transform.Translate(Vector3.right * movementSpeed * Time.deltaTime);
         }
