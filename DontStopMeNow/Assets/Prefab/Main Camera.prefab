@@ -218,14 +218,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 325524dc23d17c549a616a2980120ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 17
+  jumpHeight: 15
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 1024
   groundLayer:
     serializedVersion: 2
     m_Bits: 1536
-  fadeSpeed: 0.2
+  fadeSpeed: 0.5
 --- !u!124 &124867081929266886
 Behaviour:
   m_ObjectHideFlags: 1
