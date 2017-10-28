@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    public float movementSpeed;
+    //public float movementSpeed;
     public float jumpHeight;
     public LayerMask obstacleLayer;
     public LayerMask groundLayer;
@@ -24,12 +24,12 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
         //transform.Translate(Vector3.right * movementSpeed * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Tab) && IsGrounded())
         {
             rb.gravityScale = -rb.gravityScale;
         }
 
-        if (Input.GetKeyDown(KeyCode.Z) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             if (rb.gravityScale < 0)
             {
