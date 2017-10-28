@@ -15,12 +15,13 @@ public class PlayerController : MonoBehaviour {
     private RaycastHit2D upRay;
     private RaycastHit2D rightRay;
     private bool startFade;
-    private Color tempColor;
+    private SpriteRenderer sprite;
 
     // Use this for initialization
     void Start () {
         distance = 1.0f;
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 	
 	// Update is called once per frame
@@ -28,12 +29,12 @@ public class PlayerController : MonoBehaviour {
 
         checkObstacle();
 
-        if (Input.GetKeyDown(KeyCode.Tab) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Tab) && IsGrounded() && !playerDead)
         {
             rb.gravityScale = -rb.gravityScale;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded() && !playerDead)
         {
             if (rb.gravityScale < 0)
             {
@@ -84,7 +85,7 @@ public class PlayerController : MonoBehaviour {
     private void playerDeath()
     {
         playerDead = true;
-        //GetComponent<SpriteRenderer>().enabled = false;
+        rb.gravityScale = 0;
         startFade = true;
         GetComponent<ParticleSystem>().Play();
     }
@@ -100,9 +101,9 @@ public class PlayerController : MonoBehaviour {
 
         for (float f = 1f; f >= 0; f -= fadeSpeed)
         {
-            spriteColor = GetComponent<SpriteRenderer>().color;
+            spriteColor = sprite.color;
             spriteColor.a = f;
-            GetComponent<SpriteRenderer>().color = spriteColor;
+            sprite.color = spriteColor;
 
             yield return null;
         }
