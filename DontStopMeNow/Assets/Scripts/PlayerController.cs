@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    //public float movementSpeed;
     public float jumpHeight;
     public LayerMask obstacleLayer;
     public LayerMask groundLayer;
+    public float fadeSpeed;
 
+    private bool playerDead;
     private float distance;
     private Rigidbody2D rb;
     private RaycastHit2D downRay;
     private RaycastHit2D upRay;
     private RaycastHit2D rightRay;
+    private bool startFade;
+    private Color tempColor;
 
     // Use this for initialization
     void Start () {
@@ -22,7 +25,8 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //transform.Translate(Vector3.right * movementSpeed * Time.deltaTime);
+
+        checkObstacle();
 
         if (Input.GetKeyDown(KeyCode.Tab) && IsGrounded())
         {
@@ -40,11 +44,19 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
+        if (startFade)
+        {
+            StartCoroutine(Fade());
+        }
+    }
+
+    void checkObstacle()
+    {
         rightRay = Physics2D.Raycast(transform.position, Vector2.right, 0.6f, obstacleLayer);
 
         if (rightRay.collider != null)
         {
-            Destroy(gameObject);
+            playerDeath();
         }
     }
 
@@ -65,7 +77,34 @@ public class PlayerController : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Hazard")
         {
-            Destroy(gameObject);
+            playerDeath();
+        }
+    }
+
+    private void playerDeath()
+    {
+        playerDead = true;
+        //GetComponent<SpriteRenderer>().enabled = false;
+        startFade = true;
+        GetComponent<ParticleSystem>().Play();
+    }
+
+    public bool isPlayerDead()
+    {
+        return playerDead;
+    }
+
+    IEnumerator Fade()
+    {
+        Color spriteColor;
+
+        for (float f = 1f; f >= 0; f -= fadeSpeed)
+        {
+            spriteColor = GetComponent<SpriteRenderer>().color;
+            spriteColor.a = f;
+            GetComponent<SpriteRenderer>().color = spriteColor;
+
+            yield return null;
         }
     }
 }
