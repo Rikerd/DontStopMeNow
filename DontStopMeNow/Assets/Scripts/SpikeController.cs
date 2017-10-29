@@ -25,14 +25,14 @@ public class SpikeController : MonoBehaviour {
 
         if (moving)
         {
-            transform.Translate(Vector2.up * movementSpeed * Time.deltaTime);
+            transform.Translate(Vector2.up * movementSpeed * direction * Time.deltaTime);
         }
     }
 
     void checkPlayer()
     {
         ray = Physics2D.Raycast(transform.position, Vector2.up * direction, 7f, playerLayer);
-        if (ray.collider != null)
+        if (ray.collider != null && (player.GetComponent<Rigidbody2D>().gravityScale * direction > 0))
         {
             moving = true;
         }
