@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class LoadSceneOnEnter : MonoBehaviour {
     public int sceneIndex;
+
     private Fading fade;
 
     void Awake()
     {
-        fade = GetComponent<Fading>();
+        fade = GameObject.Find("GameManager").GetComponent<Fading>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
