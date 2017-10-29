@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseGame : MonoBehaviour {
-    public GameObject menu;
+    private GameObject menu;
+    private PlayerController player;
 
     void Awake()
     {
         menu = GameObject.Find("Pause Menu");
         menu.SetActive(false);
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update() {
-	    if (Input.GetKeyDown(KeyCode.Escape))
+	    if (Input.GetKeyDown(KeyCode.Escape) && !player.isPlayerDead())
         {
             Pause();
         }
