@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadSceneOnClick : MonoBehaviour {
+public class LoadSceneOnEnter : MonoBehaviour {
+    public int sceneIndex;
     private Fading fade;
 
     void Awake()
     {
-        fade = GameObject.Find("GameManager").GetComponent<Fading>();
+        fade = GetComponent<Fading>();
     }
 
-    public void LoadByIndex(int sceneIndex)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         StartCoroutine(FadeWait(sceneIndex));
     }

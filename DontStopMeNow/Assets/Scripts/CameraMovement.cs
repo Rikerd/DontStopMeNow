@@ -8,12 +8,12 @@ public class CameraMovement : MonoBehaviour {
     private PlayerController player;
 
 	// Use this for initialization
-	void Start () {
+	void Awake() {
         player = GetComponentInChildren<PlayerController>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update() {
         if (!player.isPlayerDead())
         {
             transform.Translate(Vector3.right * movementSpeed * Time.deltaTime);

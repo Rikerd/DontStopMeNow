@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb;
     private RaycastHit2D downRay;
     private RaycastHit2D upRay;
-    private RaycastHit2D rightRay;
+    private RaycastHit2D topRightRay;
+    private RaycastHit2D botRightRay;
     private SpriteRenderer sprite;
     private float direction;
 
@@ -51,9 +52,10 @@ public class PlayerController : MonoBehaviour {
 
     void checkObstacle()
     {
-        rightRay = Physics2D.Raycast(transform.position, Vector2.right, 0.6f, obstacleLayer);
+        topRightRay = Physics2D.Raycast(transform.position + new Vector3(0f, 0.4f, 0f), Vector2.right, 0.6f, obstacleLayer);
+        botRightRay = Physics2D.Raycast(transform.position - new Vector3(0f, 0.4f, 0f), Vector2.right, 0.6f, obstacleLayer);
 
-        if (rightRay.collider != null)
+        if (topRightRay.collider != null || botRightRay.collider != null)
         {
             playerDeath();
         }

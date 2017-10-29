@@ -7,8 +7,7 @@ public class GameOver : MonoBehaviour {
     public PlayerController player;
     public GameObject menu;
 
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         menu = GameObject.Find("Game Over Menu");
