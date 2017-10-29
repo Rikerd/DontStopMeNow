@@ -9,16 +9,18 @@ public class PlayerController : MonoBehaviour {
     public float fadeSpeed;
 
     private bool playerDead;
-    private float distance;
+    private float distance = 1;
     private Rigidbody2D rb;
     private RaycastHit2D downRay;
     private RaycastHit2D upRay;
     private RaycastHit2D rightRay;
     private SpriteRenderer sprite;
+    private float direction;
 
     // Use this for initialization
     void Start () {
         distance = 1.0f;
+        direction = 1.0f;
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
     }
@@ -37,14 +39,8 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
             {
-                if (rb.gravityScale < 0)
-                {
-                    rb.AddForce(Vector3.down * jumpHeight, ForceMode2D.Impulse);
-                }
-                else
-                {
-                    rb.AddForce(Vector3.up * jumpHeight, ForceMode2D.Impulse);
-                }
+                direction = (rb.gravityScale > 0) ? direction : -direction;
+                rb.AddForce(Vector3.up * jumpHeight * direction, ForceMode2D.Impulse);
             }
         }
         else

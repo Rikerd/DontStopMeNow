@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathMenu : MonoBehaviour {
+public class GameOver : MonoBehaviour {
 
     public PlayerController player;
     public GameObject menu;
@@ -11,6 +11,8 @@ public class DeathMenu : MonoBehaviour {
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
+        menu = GameObject.Find("Game Over Menu");
+        menu.SetActive(false);
     }
 
     // Update is called once per frame
