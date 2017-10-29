@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpikeController : MonoBehaviour {
+    public Vector3 offset;
     public float movementSpeed;
     public bool up;
     public LayerMask playerLayer;
@@ -31,8 +32,8 @@ public class SpikeController : MonoBehaviour {
 
     void checkPlayer()
     {
-        ray = Physics2D.Raycast(transform.position, Vector2.up * direction, 7f, playerLayer);
-        if (ray.collider != null && (player.GetComponent<Rigidbody2D>().gravityScale * direction > 0))
+        ray = Physics2D.Raycast(transform.position - offset, Vector2.up * direction, 10f, playerLayer);
+        if (ray.collider != null && (player.GetComponent<Rigidbody2D>().gravityScale * direction < 0))
         {
             moving = true;
         }
