@@ -18,7 +18,8 @@ public class LoadSceneOnClick : MonoBehaviour {
 
     IEnumerator FadeWait(int sceneIndex)
     {
-        float fadeTime = fade.BeginFade(1);
+        float fadeTime = fade.BeginSceneFade(1);
+        fade.BeginAudioFade(1);
         Time.timeScale = 1;
         yield return new WaitForSeconds(fadeTime);
         SceneManager.LoadScene(sceneIndex);

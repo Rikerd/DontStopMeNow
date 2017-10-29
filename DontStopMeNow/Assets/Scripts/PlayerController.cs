@@ -32,12 +32,12 @@ public class PlayerController : MonoBehaviour {
 
         if (!playerDead)
         {
-            if (Input.GetKeyDown(KeyCode.Tab) && IsGrounded())
+            if (Input.GetKeyDown(KeyCode.Tab) && isGrounded())
             {
                 rb.gravityScale = -rb.gravityScale;
             }
 
-            if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
             {
                 direction = (rb.gravityScale > 0) ? direction : -direction;
                 rb.AddForce(Vector3.up * jumpHeight * direction, ForceMode2D.Impulse);
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    bool IsGrounded()
+    bool isGrounded()
     {
         downRay = Physics2D.Raycast(transform.position, Vector2.down, distance, groundLayer);
         upRay = Physics2D.Raycast(transform.position, Vector2.up, distance, groundLayer);
