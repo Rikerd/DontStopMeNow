@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour {
     private RaycastHit2D downRay;
     private RaycastHit2D upRay;
     private RaycastHit2D rightRay;
-    private bool startFade;
     private SpriteRenderer sprite;
 
     // Use this for initialization
@@ -23,29 +22,32 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
 
         checkObstacle();
 
-        if (Input.GetKeyDown(KeyCode.Tab) && IsGrounded() && !playerDead)
+        if (!playerDead)
         {
-            rb.gravityScale = -rb.gravityScale;
-        }
+            if (Input.GetKeyDown(KeyCode.Tab) && IsGrounded())
+            {
+                rb.gravityScale = -rb.gravityScale;
+            }
 
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded() && !playerDead)
-        {
-            if (rb.gravityScale < 0)
+            if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
             {
-                rb.AddForce(Vector3.down * jumpHeight, ForceMode2D.Impulse);
-            } else
-            {
-                rb.AddForce(Vector3.up * jumpHeight, ForceMode2D.Impulse);
+                if (rb.gravityScale < 0)
+                {
+                    rb.AddForce(Vector3.down * jumpHeight, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    rb.AddForce(Vector3.up * jumpHeight, ForceMode2D.Impulse);
+                }
             }
         }
-
-        if (startFade)
+        else
         {
             StartCoroutine(Fade());
         }
@@ -86,7 +88,6 @@ public class PlayerController : MonoBehaviour {
     {
         playerDead = true;
         rb.gravityScale = 0;
-        startFade = true;
         GetComponent<ParticleSystem>().Play();
     }
 
