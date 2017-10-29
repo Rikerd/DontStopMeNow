@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour {
     private RaycastHit2D topRightRay;
     private RaycastHit2D botRightRay;
     private SpriteRenderer sprite;
-    private float direction;
+    public float direction;
 
     // Use this for initialization
     void Start () {
@@ -33,15 +33,16 @@ public class PlayerController : MonoBehaviour {
 
         if (!playerDead)
         {
-            if (Input.GetKeyDown(KeyCode.Tab) && isGrounded())
+            direction = (rb.gravityScale > 0) ? direction : -direction;
+
+            if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && isGrounded())
             {
-                rb.gravityScale = -rb.gravityScale;
+                rb.AddForce(Vector3.up * jumpHeight * direction, ForceMode2D.Impulse);
             }
 
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
+            if ((Input.GetKeyDown(KeyCode.Tab) || Input.GetMouseButtonDown(1)) && isGrounded())
             {
-                direction = (rb.gravityScale > 0) ? direction : -direction;
-                rb.AddForce(Vector3.up * jumpHeight * direction, ForceMode2D.Impulse);
+                rb.gravityScale = -rb.gravityScale;
             }
         }
         else
@@ -52,12 +53,11 @@ public class PlayerController : MonoBehaviour {
 
     void checkObstacle()
     {
-        topRightRay = Physics2D.Raycast(transform.position + new Vector3(0f, 0.35f, 0f), Vector2.right, 0.6f, obstacleLayer);
-        botRightRay = Physics2D.Raycast(transform.position - new Vector3(0f, 0.35f, 0f), Vector2.right, 0.6f, obstacleLayer);
+        topRightRay = Physics2D.Raycast(transform.position + new Vector3(0f, 0.4f, 0f), Vector2.right, 0.6f, obstacleLayer);
+        botRightRay = Physics2D.Raycast(transform.position - new Vector3(0f, 0.4f, 0f), Vector2.right, 0.6f, obstacleLayer);
 
         if (topRightRay.collider != null || botRightRay.collider != null)
         {
-            Debug.Log("Error with colliding");
             playerDeath();
         }
     }
@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour {
         playerDead = true;
         rb.gravityScale = 0;
         GetComponent<ParticleSystem>().Play();
+        GetComponent<AudioSource>().Play();
     }
 
     public bool isPlayerDead()
