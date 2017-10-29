@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LoadSceneOnClick : MonoBehaviour {
     private Fading fade;
@@ -13,6 +14,7 @@ public class LoadSceneOnClick : MonoBehaviour {
 
     public void LoadByIndex(int sceneIndex)
     {
+        GetComponent<Button>().interactable = false;
         StartCoroutine(FadeWait(sceneIndex));
     }
 
