@@ -5,12 +5,12 @@ using UnityEngine;
 public class SpikeController : MonoBehaviour {
     public Vector3 offset;
     public float movementSpeed;
+    public float direction = 1;
     public bool up;
     public LayerMask playerLayer;
 
     private GameObject player;
     private RaycastHit2D ray;
-    private float direction = 1;
     private bool moving;
 
     // Use this for initialization
