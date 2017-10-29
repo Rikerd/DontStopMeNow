@@ -52,11 +52,12 @@ public class PlayerController : MonoBehaviour {
 
     void checkObstacle()
     {
-        topRightRay = Physics2D.Raycast(transform.position + new Vector3(0f, 0.4f, 0f), Vector2.right, 0.6f, obstacleLayer);
-        botRightRay = Physics2D.Raycast(transform.position - new Vector3(0f, 0.4f, 0f), Vector2.right, 0.6f, obstacleLayer);
+        topRightRay = Physics2D.Raycast(transform.position + new Vector3(0f, 0.35f, 0f), Vector2.right, 0.6f, obstacleLayer);
+        botRightRay = Physics2D.Raycast(transform.position - new Vector3(0f, 0.35f, 0f), Vector2.right, 0.6f, obstacleLayer);
 
         if (topRightRay.collider != null || botRightRay.collider != null)
         {
+            Debug.Log("Error with colliding");
             playerDeath();
         }
     }
