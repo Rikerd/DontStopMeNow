@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour {
     {
         playerDead = true;
         rb.gravityScale = 0;
+        rb.velocity = Vector2.zero;
         GetComponent<ParticleSystem>().Play();
         GetComponent<AudioSource>().Play();
     }
