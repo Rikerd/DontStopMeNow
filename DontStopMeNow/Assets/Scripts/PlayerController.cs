@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
         {
             direction = (rb.gravityScale > 0) ? 1 : -1;
 
-            if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButtonDown(0)) && grounded)
+            if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && grounded)
             {
                 rb.AddForce(Vector3.up * jumpHeight * direction, ForceMode2D.Impulse);
             }
