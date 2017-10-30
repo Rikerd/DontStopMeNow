@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
     public float jumpHeight;
@@ -9,7 +10,7 @@ public class PlayerController : MonoBehaviour {
     public float fadeSpeed;
 
     private bool playerDead;
-    private float distance = 0.6f;
+    private float distance;
     private Rigidbody2D rb;
     private RaycastHit2D downRay;
     private RaycastHit2D upRay;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour {
     private RaycastHit2D botRightRay;
     private SpriteRenderer sprite;
     public float direction;
+    private bool grounded;
 
     // Use this for initialization
     void Start () {
@@ -31,7 +33,7 @@ public class PlayerController : MonoBehaviour {
 
         checkObstacle();
 
-        bool grounded = isGrounded();
+        grounded = isGrounded();
 
         if (!playerDead)
         {
@@ -42,7 +44,7 @@ public class PlayerController : MonoBehaviour {
                 rb.AddForce(Vector3.up * jumpHeight * direction, ForceMode2D.Impulse);
             }
 
-            if ((Input.GetKeyDown(KeyCode.Tab) || Input.GetMouseButtonDown(1)) && grounded)
+            if ((Input.GetKeyDown(KeyCode.Tab) || Input.GetMouseButtonDown(1)) && grounded && SceneManager.GetActiveScene().name != "Level 1")
             {
                 rb.gravityScale = -rb.gravityScale;
             }

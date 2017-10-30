@@ -371,6 +371,16 @@ Prefab:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 9ebc07270e0c45b4e8e2c58b353af376, type: 3}
+    - target: {fileID: 82551780645438702, guid: 1a75dba6c62b32848ab20deb935b84c4,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9ebc07270e0c45b4e8e2c58b353af376, type: 3}
+    - target: {fileID: 82551780645438702, guid: 1a75dba6c62b32848ab20deb935b84c4,
+        type: 2}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114644999908950840, guid: 1a75dba6c62b32848ab20deb935b84c4, type: 2}
     - {fileID: 114564257405886666, guid: 1a75dba6c62b32848ab20deb935b84c4, type: 2}
@@ -528,7 +538,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Don't Stop Me Now
+  m_Text: Square Sprint
 --- !u!222 &634326822
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class TutorialController : MonoBehaviour {
 	void Awake () {
         tutorial = GetComponent<TutorialController>();
 
-        if (SceneManager.GetActiveScene().name != "Level 1" && SceneManager.GetActiveScene().name != "Level 2")
+        if (SceneManager.GetActiveScene().name != "Level 1" && SceneManager.GetActiveScene().name != "Level 2" && SceneManager.GetActiveScene().name != "Level 3")
         {
             tutorial.enabled = false;
         }
@@ -36,5 +36,13 @@ public class TutorialController : MonoBehaviour {
                 tutorial.enabled = false;
             }
         }
-	}
+        else if (SceneManager.GetActiveScene().name == "Level 3")
+        {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            {
+                movement.completeTutorial = true;
+                tutorial.enabled = false;
+            }
+        }
+    }
 }

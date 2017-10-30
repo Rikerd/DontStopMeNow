@@ -12,7 +12,7 @@ public class CameraMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake() {
-        if (SceneManager.GetActiveScene().name != "Level 1" && SceneManager.GetActiveScene().name != "Level 2")
+        if (SceneManager.GetActiveScene().name != "Level 1" && SceneManager.GetActiveScene().name != "Level 2" && SceneManager.GetActiveScene().name != "Level 3")
         {
             completeTutorial = true;
         }
