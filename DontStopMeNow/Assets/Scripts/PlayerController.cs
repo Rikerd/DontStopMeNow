@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     public float fadeSpeed;
 
     private bool playerDead;
-    private float distance = 1;
+    private float distance = 0.6f;
     private Rigidbody2D rb;
     private RaycastHit2D downRay;
     private RaycastHit2D upRay;
@@ -31,16 +31,22 @@ public class PlayerController : MonoBehaviour {
 
         checkObstacle();
 
+        bool grounded = isGrounded();
+
         if (!playerDead)
         {
-            direction = (rb.gravityScale > 0) ? direction : -direction;
+            direction = (rb.gravityScale > 0) ? 1 : -1;
 
-            if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) && isGrounded())
+            if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButtonDown(0)) && grounded)
             {
-                rb.AddForce(Vector3.up * jumpHeight * direction, ForceMode2D.Impulse);
+                Debug.Log(Vector3.up * jumpHeight * direction);
+                if((direction == 1 && rb.velocity.y < 1) || (direction == -1 && rb.velocity.y > -1))
+                {
+                    rb.AddForce(Vector3.up * jumpHeight * direction, ForceMode2D.Impulse);
+                }
             }
 
-            if ((Input.GetKeyDown(KeyCode.Tab) || Input.GetMouseButtonDown(1)) && isGrounded())
+            if ((Input.GetKeyDown(KeyCode.Tab) || Input.GetMouseButtonDown(1)) && grounded)
             {
                 rb.gravityScale = -rb.gravityScale;
             }
@@ -66,8 +72,12 @@ public class PlayerController : MonoBehaviour {
     {
         downRay = Physics2D.Raycast(transform.position, Vector2.down, distance, groundLayer);
         upRay = Physics2D.Raycast(transform.position, Vector2.up, distance, groundLayer);
-
-        if (downRay.collider != null || upRay.collider != null)
+        
+        if (downRay.collider != null && direction == 1) {
+            return true;
+        }
+            
+        if (upRay.collider != null && direction == -1)
         {
             return true;
         }
