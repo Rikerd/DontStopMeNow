@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1144381697ae4d469cb506fc0158c9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 1.5, y: 0, z: 0}
   movementSpeed: 50
   direction: 1
   up: 0
