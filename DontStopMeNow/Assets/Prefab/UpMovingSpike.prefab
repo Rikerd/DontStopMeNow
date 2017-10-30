@@ -85,10 +85,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 1.5, y: 0, z: 0}
   movementSpeed: 50
+  direction: 1
   up: 1
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  horizontal: 0
+  detectionRange: 0
 --- !u!212 &212031371752561668
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -123,7 +126,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 39af5f5e165a75543b0a765964cc4024, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0d14c560d2690ab42a999d13bd24d58d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
