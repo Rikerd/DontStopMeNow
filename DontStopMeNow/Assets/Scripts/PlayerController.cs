@@ -39,11 +39,7 @@ public class PlayerController : MonoBehaviour {
 
             if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButtonDown(0)) && grounded)
             {
-                Debug.Log(Vector3.up * jumpHeight * direction);
-                if((direction == 1 && rb.velocity.y < 1) || (direction == -1 && rb.velocity.y > -1))
-                {
-                    rb.AddForce(Vector3.up * jumpHeight * direction, ForceMode2D.Impulse);
-                }
+                rb.AddForce(Vector3.up * jumpHeight * direction, ForceMode2D.Impulse);
             }
 
             if ((Input.GetKeyDown(KeyCode.Tab) || Input.GetMouseButtonDown(1)) && grounded)
